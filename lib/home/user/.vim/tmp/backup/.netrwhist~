@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/root/.ccio/Git/cloudctl/ansible/roles/dependencies/tasks'
+let g:netrw_dirhist_0='/home/kmorgan/.Xresources.d'
+let g:netrw_dirhist_9='/root/CloudCTL/ansible/roles/dependencies/tasks'
+let g:netrw_dirhist_8='/root/CloudCTL/ansible/roles/dependencies/defaults'
+let g:netrw_dirhist_7='/root/CloudCTL/ansible/roles/dependencies'
+let g:netrw_dirhist_6='/root/CloudCTL/ansible/roles'
+let g:netrw_dirhist_5='/root/CloudCTL/ansible'
+let g:netrw_dirhist_4='/root/CloudCTL/ansible/roles/dependencies/tasks'
+let g:netrw_dirhist_3='/home/kmorgan/RH/Git/deploy'
+let g:netrw_dirhist_2='/home/kmorgan/RH/Git'

@@ -1,0 +1,30 @@
+---
+- name: get vpc
+  ec2_vpc_net_info:
+    region: {{ cloud_region }}
+    filters:
+      "tag:Name": "{{ name_cluster_vpc }}"
+  register: vpc-facts
+
+- name: get info
+  ec2_vpc_subnet_info:
+    region: {{ cloud_region }}
+    filters:
+      vpc-id: {{ name_cluster_vpc }}
+
+- name: Provision a set of instances
+  ec2:
+    region: '{{ cloud_region_region }}'
+    instance_type: '{{ instance_type }}'
+    image: '{{ ami }}'
+    vpc_subnet_id: '{{ item.subnet_id | default(default_subnet_id) }}'
+    volumes: '{{ item.volumes }}'
+    groups: '{{ item.security_groups | default(ec2_group_facts.security_groups[0].group_name) }}'
+    instance_profile_name: '{{ item.iam_profile | default(default_iam) }}'
+    key_name: '{{ key_name }}'
+    wait: true
+    instance_tags: "{{ item.tags }}"
+    count_tag: "{{ item.tags }}"
+    exact_count: '{{ item.count }}'
+    termination_protection: '{{ item.termination_protection | default("no") }}'
+  loop: '{{ servers }}'

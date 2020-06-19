@@ -1,0 +1,21 @@
+/*
+output "bastion_server_id" {
+    value =  aws_instance.bastion-node[0].id
+}
+
+output "bastion_public_dns" {
+    value =  aws_instance.bastion-node[0].public_dns
+}
+
+output "bastion_server_ip" {
+    value =  aws_instance.bastion-node[0].public_ip
+}
+
+output "bastion_security_group_id" {
+    value =  aws_security_group.public-sg[0].id
+}
+
+output "bastion_server_ssh_login" {
+    value =  format("ssh -i %s %s@%s", var.bastion_ssh_public_key_file_path, var.bastion_config.user, aws_instance.bastion-node[0].public_dns)
+}
+*/

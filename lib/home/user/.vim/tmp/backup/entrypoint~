@@ -1,0 +1,59 @@
+#!/bin/bash -e
+#################################################################################
+# SSH host key generation & prep
+run_sshd () {
+
+# Write host keys
+test -f /etc/ssh/ssh_host_ecdsa_key   \
+  || /usr/bin/ssh-keygen -q -t ecdsa   -f /etc/ssh/ssh_host_ecdsa_key   -C '' -N '' 2>&1 1>/dev/null
+test -f /etc/ssh/ssh_host_rsa_key     \
+  || /usr/bin/ssh-keygen -q -t rsa     -f /etc/ssh/ssh_host_rsa_key     -C '' -N '' 2>&1 1>/dev/null
+test -f /etc/ssh/ssh_host_ed25519_key \
+  || /usr/bin/ssh-keygen -q -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -C '' -N '' 2>&1 1>/dev/null
+
+
+# Write rsa priv key
+# - feature: print priv key to log
+test -f /root/.ssh/id_rsa             \
+  || /usr/bin/ssh-keygen    -t rsa  -f /root/.ssh/id_rsa  -N '' 2>&1                 # 1>/dev/null
+
+# Write rsa pub key
+test -f /root/.ssh/id_rsa             \
+  || /usr/bin/ssh-keygen -y -t rsa  -f /root/.ssh/id_rsa  > /root/.ssh/id_rsa.pub 2>&1 1>/dev/null
+
+# Add rsa pub key to authorized_keys
+/usr/bin/cat /root/.ssh/id_rsa.pub >>/root/.ssh/authorized_keys 2>&1 1>/dev/null
+
+#chown -R root:root /root/.ssh
+}
+run_sshd
+
+/usr/sbin/sshd -p 2022 -E /dev/stderr -f /etc/ssh/sshd_config &
+
+run_tmux_keepalive () {
+while true
+  do
+    tmuxKeepAlive=$(tmux ls | awk -F'[: ]' '/ContainerOne/ {print $1}')
+    if [[ "${tmuxKeepAlive}" != "ContainerOne" ]]; then
+      /usr/bin/tmux new -s ContainerOne -d
+      echo "Restarted ContainerOne tmux session"
+    fi
+    sleep 5
+  done
+}
+
+# Override entrypoint with user defined entrypoint
+if [ $# -gt 0 ];then
+
+  /usr/bin/tmux new -s ContainerOne -d
+  exec "$@"
+
+else
+
+  /usr/bin/tmux new -s ContainerOne -d
+  echo "Started ContainerOne tmux session"
+
+  # loop to monitor for the ContainerOne session
+  run_tmux_keepalive
+fi
+

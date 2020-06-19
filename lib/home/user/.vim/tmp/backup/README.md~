@@ -1,0 +1,5 @@
+# Red Hat OpenShift 4 - Platform One
+## [Full Automation Overview](https://repo1.dsop.io/dsop/redhat/platformone/ocp4x/wiki/-/blob/v2-govcloud-automation/OVERVIEW.md)
+## Environments:
+ - [OpenShift 4.x on AWS Fences](https://repo1.dsop.io/dsop/redhat/platformone/ocp4x/wiki/-/tree/aws-fences-automation)
+ - [OpenShift 4.x on AWS AirGapped GovCloud](https://repo1.dsop.io/dsop/redhat/platformone/ocp4x/wiki/-/tree/v2-govcloud-automation)

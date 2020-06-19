@@ -1,0 +1,13 @@
+#!/usr/local/bin/ansible-playbook --inventory=inventory
+- name: 'RedHat | PlatformOne | deploy | hydrate' 
+  hosts: localhost
+  vars_files:
+    - '../p1.yml'
+    - 'vars/{{ target_environment }}.yml'
+    - 'vars/global.yml'
+  vars:
+    module: "bootstrap.tf"
+    state_provider: "local"
+    ansible_name_module: "{{ ansible_name }} | deploy | {{ module }}"
+  roles:
+    - bootstrap

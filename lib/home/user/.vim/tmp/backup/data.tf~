@@ -1,0 +1,18 @@
+variable "subnet_id" {}
+variable "public_subnets" {}
+
+data "aws_subnet_ids" "public_subnets" {
+  vpc_id = var.infrastructure_id
+  filter {
+    name   = "tag:Name"
+    values = ["public"] # insert values here
+  }
+}
+
+data "aws_subnet" "public_subnet" {
+  id = var.public_subnets[0]
+  filter {
+    name   = "tag:Name"
+    values = ["public"] # insert values here
+  }
+}

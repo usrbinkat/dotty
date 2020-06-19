@@ -1,0 +1,19 @@
+#!/bin/bash
+clear
+sudo podman rm --force govcloud;
+sudo podman rmi --force one:govcloud;
+rm -rf ${HOME}/PlatformOne
+
+mkdir -p ${HOME}/PlatformOne/images
+
+sudo podman pull k8s.gcr.io/pause:3.1
+sudo podman pull docker.io/library/registry:2 
+sudo podman pull docker.io/library/nginx:latest 
+sudo podman pull docker.io/containercraft/one:govcloud
+
+sudo podman save -o ${HOME}/PlatformOne/images/docker-pause-image.tar        k8s.gcr.io/pause:3.1
+sudo podman save -o ${HOME}/PlatformOne/images/docker-registry2-image.tar    registry:2 
+sudo podman save -o ${HOME}/PlatformOne/images/docker-nginxlatest-image.tar  nginx:latest
+sudo podman save -o ${HOME}/PlatformOne/images/docker-one-image.tar          containercraft/one:govcloud
+
+sudo podman run -d -h govcloud --name govcloud --privileged --volume ${HOME}/PlatformOne:/root/PlatformOne:z docker.io/containercraft/one:govcloud

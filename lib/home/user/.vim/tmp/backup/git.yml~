@@ -1,0 +1,9 @@
+#---
+######## Clone Git Dependencies
+- name: '{{ ansible_name_module }} | file:path | Create base CCIO directory tree' 
+  file:
+    path: "{{ item.path }}"
+    state: "{{ item.state }}"
+  with_items:
+    - "{{ ansiblerepos }}"
+    - "{{ terraformrepos }}"

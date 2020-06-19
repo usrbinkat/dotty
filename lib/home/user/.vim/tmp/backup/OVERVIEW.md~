@@ -1,0 +1,30 @@
+# Full Automation Prep/Build/Deploy Overview    
+>    Describes high level govcloud build steps & anatomy of RedHat P1 Infrastructure IaC        
+--------------------------------------------------------------------------------    
+1. [X] Launch & Exec into ContainerOne ( local / prep-workstation )    
+2. [X] Execute `p1` init script to set variables and clone appropriate content (ContainerOne)    
+3. [X] Build Artifact Bundle: `bundle/site.yml` (ContainerOne)    
+    - [X] Download IaC Dependencies: `dependencies.yml`    
+    - [X] Template Config Files: `templates.yml`    
+    - [X] Create & Prepare OpenShift Manifest Files: `manifests.yml`    
+    - [X] Generate CoreOS Ignition Files: `ignition.yml`    
+    - [X] Download OpenShift Deployment Container Images: `images.yml`    
+    - [X] Bundle all artifacts required for airgap deployment: `bundle.yml`        
+    - [X] Upload Artifact Bundle to S3: `upload.yml`            
+4. [ ] Build VPC & CloudCTL Bastion: `build/site.yml` (ContainerOne)    
+    - [ ] Terraform Build VPC: `vpc.yml`    
+    - [ ] Terraform Build CloudCTL Bastion: `cloudctl.yml`    
+5. [ ] Prepare CloudCTL: `cloudctl/site.yml` | `/bin/bash -c cloudctl.sh`    
+    - [ ] Pull Artifact Bundle on CloudCTL: `import.yml`    
+    - [ ] Unpack Artifact Bundle on CloudCTL: `stage.yml`    
+    - [ ] Setup CloudCTL Container Pod: `pod.yml`    
+    - [ ] Prepare local CloudCTL ContainerOne: `local.yml`    
+    - [ ] Load images into registry service: `hydrate.yml`    
+6. [ ] Deploy OpenShift: `deploy/site.yml` (CloudCtl:ContainerOne)    
+    - [ ] Build OpenShift Bootstrap Node: `bootstrap.yml`    
+    - [ ] Build OpenShift Master Nodes: `masters.yml`    
+    - [ ] Monitor Cluster Up Status: `monitor.yml`    
+7. [ ] Configure OpenShift: `configure/site.yml` (CloudCtl:ContainerOne)    
+    - [ ] Storage Configuration: `storageconfig.yml`    
+    - [ ] Machine Configuration: `machineconfig.yml`    
+8. Post Configure Testing    

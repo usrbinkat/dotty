@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/kmorgan/RH/Git/bootstrap/defaults'
+let g:netrw_dirhist_5='/home/kmorgan/RH/Git/bundle/templates/registry2'
+let g:netrw_dirhist_4='/home/kmorgan/RH/Git/bundle/templates'
+let g:netrw_dirhist_3='/home/kmorgan/RH/Git/bundle/roles/bundle/tasks'
+let g:netrw_dirhist_2='/home/kmorgan/RH/Git/bundle/roles/images/tasks'
+let g:netrw_dirhist_1='/home/kmorgan/RH/Git/bundle/roles/images'
+let g:netrw_dirhist_0='/home/kmorgan/RH/Git/bundle/roles'
+let g:netrw_dirhist_9='/home/kmorgan/RH/Git/bundle/roles/images/tasks'
+let g:netrw_dirhist_8='/home/kmorgan/RH/Git/bundle/roles/ignition/tasks'
+let g:netrw_dirhist_7='/home/kmorgan/RH/Git/bundle/vars'
