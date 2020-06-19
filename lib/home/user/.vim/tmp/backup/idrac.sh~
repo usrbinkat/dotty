@@ -1,4 +1,0 @@
-#!/bin/bash
-ifName="enxd481d74fd008"
-ip addr add 10.0.0.16/32 dev ${ifName}
-ip r add 10.0.0.17 dev ${ifName}
