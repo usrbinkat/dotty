@@ -19,5 +19,5 @@ EOF
 
   git stage -A
   git commit -m "${git_commit_msg}"
-  git push origin master
+  git push origin ${git_branch}
 }
