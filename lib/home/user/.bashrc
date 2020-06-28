@@ -4,8 +4,8 @@
 #  - touch 1.txt
 #  - gitup add text file
 gitup () {
-  git_branch=$(git branch | sed 's/* //g')
   git_commit_msg="$@"
+  git_branch=$(git branch | sed 's/* //g')
   git_remote_push=$(git remote -v | awk '/push/{print $1, $2}')
 
   cat <<EOF
