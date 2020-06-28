@@ -3,10 +3,11 @@
 #  - cd ~/Git/projectName
 #  - touch 1.txt
 #  - gitup add text file
+# Git stage/commit/push
 gitup () {
+  git_branch=$(git branch --show-current --column)
   git_commit_msg="$@"
-  git_branch=$(git branch | sed 's/* //g')
-  git_remote_push=$(git remote -v | awk '/push/{print $1, $2}')
+  git_remote_push="$(git remote get-url --push --all origin)"
 
   cat <<EOF
 
