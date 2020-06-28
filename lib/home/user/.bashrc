@@ -1,4 +1,8 @@
 # Git stage/commit/push function to ease devel
+# Example:
+#  - cd ~/Git/projectName
+#  - touch 1.txt
+#  - gitup add text file
 gitup () {
   git_branch=$(git branch | sed 's/* //g')
   git_commit_msg="$@"
@@ -14,6 +18,6 @@ gitup () {
 EOF
 
   git stage -A
-  git commit -m 'moving to podman cloudctl+containerone deployment strategy'
+  git commit -m "${git_commit_msg}"
   git push origin master
 }
