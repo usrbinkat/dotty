@@ -1,4 +1,4 @@
-# Git stage/commit/push function to ease devel
+# Git stage/commit/push function
 # Example:
 #  - cd ~/Git/projectName
 #  - touch 1.txt
