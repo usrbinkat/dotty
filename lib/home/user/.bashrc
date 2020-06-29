@@ -12,10 +12,10 @@ gitup () {
   cat <<EOF
 
   Commiting to:
-    - remote:    ${git_remote_push}
     - branch:    ${git_branch}
     - message:   ${git_commit_msg}
-
+    - remote:    ${git_remote_push}
+    
 EOF
 
   git stage -A
