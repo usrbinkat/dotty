@@ -5,8 +5,8 @@
 #  - gitup add text file
 # Git stage/commit/push
 gitup () {
-  git_branch=$(git branch --show-current --column)
   git_commit_msg="$@"
+  git_branch=$(git branch --show-current --column)
   git_remote_push="$(git remote get-url --push --all origin)"
 
   cat <<EOF
