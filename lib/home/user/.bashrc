@@ -5,8 +5,11 @@
 #  - gitup add text file
 # Git stage/commit/push
 gitup () {
+  sudo chown -R $USER ~/.ssh
+  sudo chown -R $USER ./
+  git pull
   git_commit_msg="$@"
-  git_branch=$(git branch --show-current --column)
+  git_branch=$(git branch --column | awk '{print $2}' | head -n 1)
   git_remote_push="$(git remote get-url --push --all origin)"
 
   cat <<EOF
@@ -15,7 +18,7 @@ gitup () {
     - branch:    ${git_branch}
     - message:   ${git_commit_msg}
     - remote:    ${git_remote_push}
-    
+
 EOF
 
   git stage -A
