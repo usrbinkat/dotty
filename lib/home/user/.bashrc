@@ -7,21 +7,23 @@
 gitup () {
   sudo chown -R $USER ~/.ssh
   sudo chown -R $USER ./
+
   git pull
   git_commit_msg="$@"
-  git_branch=$(git branch --column | awk '{print $2}' | head -n 1)
-  git_remote_push="$(git remote get-url --push --all origin)"
+  git_remote=$(git remote)
+  git_branch=$(git branch --show-current)
+  git_remote_push="$(git remote get-url --push ${git_remote} | awk -F'[@]' '{print $2}')"
 
   cat <<EOF
 
   Commiting to:
     - branch:    ${git_branch}
-    - message:   ${git_commit_msg}
     - remote:    ${git_remote_push}
+    - message:   ${git_commit_msg}
 
 EOF
 
   git stage -A
-  git commit -m "${git_commit_msg}"
-  git push origin ${git_branch}
+  git commit -m "${git_commit_msg}" --signoff
+  git push
 }
