@@ -5,14 +5,15 @@
 #  - gitup add text file
 # Git stage/commit/push
 gitup () {
+
   sudo chown -R $USER ~/.ssh
   sudo chown -R $USER ./
 
   git pull
   git_commit_msg="$@"
-  git_remote=$(git remote)
   git_branch=$(git branch --show-current)
-  git_remote_push="$(git remote get-url --push ${git_remote} | awk -F'[@]' '{print $2}')"
+  git_remote=$(git remote get-url --push origin)
+  git_remote_push="$(git remote get-url --push origin | awk -F'[@]' '{print $2}')"
 
   cat <<EOF
 
